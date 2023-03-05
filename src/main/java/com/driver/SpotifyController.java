@@ -14,7 +14,7 @@ public class SpotifyController {
     @PostMapping("/add-user")
     public String createUser(@RequestParam(name = "name") String name, String mobile){
         //create the user with given name and number
-        spotifyService.createUser(name,mobile);
+        User  u =spotifyService.createUser(name,mobile);
         return "Success";
 
     }
@@ -22,7 +22,7 @@ public class SpotifyController {
     @PostMapping("/add-artist")
     public String createArtist(@RequestParam(name = "name") String name){
         //create the artist with given name
-        spotifyService.createArtist(name);
+        Artist a = spotifyService.createArtist(name);
         return "Success";
     }
 
@@ -30,7 +30,7 @@ public class SpotifyController {
     public String createAlbum(@RequestParam(name = "title") String title, String artistName){
         //If the artist does not exist, first create an artist with given name
         //Create an album with given title and artist
-        spotifyService.createAlbum(title,artistName);
+        Album album=spotifyService.createAlbum(title,artistName);
         return "Success";
     }
 
@@ -38,7 +38,7 @@ public class SpotifyController {
     public String createSong(String title, String albumName, int length) throws Exception{
         //If the album does not exist in database, throw "Album does not exist" exception
         //Create and add the song to respective album
-        spotifyService.createSong(title,albumName,length);
+        Song song =spotifyService.createSong(title,albumName,length);
 
         return "Success";
     }
@@ -48,7 +48,7 @@ public class SpotifyController {
         //Create a playlist with given title and add all songs having the given length in the database to that playlist
         //The creater of the playlist will be the given user and will also be the only listener at the time of playlist creation
         //If the user does not exist, throw "User does not exist" exception
-        spotifyService.createPlaylistOnLength(mobile,title,length);
+        Playlist playlist =spotifyService.createPlaylistOnLength(mobile,title,length);
         return "Success";
     }
 
@@ -57,7 +57,7 @@ public class SpotifyController {
         //Create a playlist with given title and add all songs having the given titles in the database to that playlist
         //The creater of the playlist will be the given user and will also be the only listener at the time of playlist creation
         //If the user does not exist, throw "User does not exist" exception
-        spotifyService.createPlaylistOnName(mobile,title,songTitles);
+        Playlist playlist =spotifyService.createPlaylistOnName(mobile,title,songTitles);
         return "Success";
     }
 
@@ -69,7 +69,7 @@ public class SpotifyController {
         //If the playlist does not exists, throw "Playlist does not exist" exception
         // Return the playlist after updating
 
-        spotifyService.findPlaylist(mobile,playlistTitle);
+        Playlist playlist =spotifyService.findPlaylist(mobile,playlistTitle);
         return "Success";
     }
 
@@ -81,7 +81,7 @@ public class SpotifyController {
         //If the user does not exist, throw "User does not exist" exception
         //If the song does not exist, throw "Song does not exist" exception
         //Return the song after updating
-        spotifyService.likeSong(mobile,songTitle);
+        Song song = spotifyService.likeSong(mobile,songTitle);
         return "Success";
     }
 
